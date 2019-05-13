@@ -5,12 +5,15 @@
 
 int main( int argc, char* argv[] )
 {
-    try{
+    /*try{
         RealSense realsense( argc, argv );
         realsense.run();
     } catch( std::exception& ex ){
         std::cout << ex.what() << std::endl;
-    }
+    }*/
+
+    RealSense realsense( argc, argv );
+    realsense.run();
 
     return 0;
 }

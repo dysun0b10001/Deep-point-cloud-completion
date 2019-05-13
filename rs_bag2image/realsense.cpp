@@ -4,6 +4,9 @@
 #include <sstream>
 #include <iomanip>
 #include <limits>
+#include <iostream>
+#include <vector>
+#include <string>
 
 // Constructor
 RealSense::RealSense( int argc, char* argv[] )
@@ -26,6 +29,7 @@ void RealSense::run()
 {
     // Retrieve Last Position
     uint64_t last_position = pipeline_profile.get_device().as<rs2::playback>().get_position();
+    std::vector <std::string> data_list;
 
     // Main Loop
     while( true ){
@@ -36,12 +40,17 @@ void RealSense::run()
         draw();
 
         // Show Data
-        if( display ){
+        /*if( display ){
             show();
-        }
+        }*/
 
         // Save Data
-        save();
+        if(frame_num % frame_int == 0){
+            data_list.push_back(std::to_string(frame_num/frame_int+1));
+            data_list.push_back("\n");
+            save();
+        }
+        
 
         // Key Check
         const int32_t key = cv::waitKey( 1 );
@@ -55,7 +64,17 @@ void RealSense::run()
             break;
         }
         last_position = current_position;
+
+        frame_num += 1;
     }
+    std::ofstream file;
+    file.open(directory.generic_string()+"/data_list.txt");
+    for (std::vector<std::string>::iterator iter = data_list.begin(); iter < data_list.end()-1; ++iter){
+        file << *iter;
+    }
+    file.close();
+    std::cout << std::endl;
+    std::cout << "finish, "<< frame_num/frame_int + 1<< " frame(s) loaded."<<std::endl;
 }
 
 // Initialize
@@ -82,7 +101,8 @@ inline void RealSense::initializeParameter( int argc, char * argv[] )
         "{ bag b     |       | path to input bag file. (required)                                       }"
         "{ scaling s | false | enable depth scaling for visualization. false is raw 16bit image. (bool) }"
         "{ quality q | 95    | jpeg encoding quality for color and infrared. [0-100]                    }"
-        "{ display d | false | display each stream images on window. false is not display. (bool)       }";
+        "{ display d | false | display each stream images on window. false is not display. (bool)       }"
+        "{ interval i| 1     | frame interval of saved images. (uint32_t)                               }";
     cv::CommandLineParser parser( argc, argv, keys );
 
     if( parser.has( "help" ) ){
@@ -130,6 +150,14 @@ inline void RealSense::initializeParameter( int argc, char * argv[] )
     else{
         display = parser.get<bool>( "display" );
     }
+
+    // Retrieve frame interval (Option)
+    if( !parser.has( "interval" ) ){
+        frame_int = 1;
+    }
+    else{
+        frame_int = parser.get<uint32_t>( "interval" );
+    }
 }
 
 // Initialize Sensor
@@ -152,13 +180,15 @@ inline void RealSense::initializeSensor()
     pipeline_profile = pipeline.start( config );
 
     // Set Non Real Time Playback
-    pipeline_profile.get_device().as<rs2::playback>().set_real_time( false );
+    pipeline_profile.get_device().as<rs2::playback>().set_real_time( true );
 
     // Show Enable Streams
+    std::cout<<"available streams:"<<std::endl;
     const std::vector<rs2::stream_profile> stream_profiles = pipeline_profile.get_streams();
     for( const rs2::stream_profile stream_profile : stream_profiles ){
         std::cout << stream_profile.stream_name() << std::endl;
     }
+    std::cout<<std::endl;
 }
 
 // Initialize Save
@@ -492,7 +522,8 @@ inline void RealSense::saveColor()
     // Create Save Directory and File Name
     std::ostringstream oss;
     oss << directory.generic_string() << "/Color/";
-    oss << std::setfill( '0' ) << std::setw( 6 ) << color_frame.get_frame_number() << ".png";
+    oss << "color_" << frame_num/frame_int + 1 << ".png";
+    std::cout << "color_" << frame_num/frame_int + 1 << ".png" << " saved."<<std::endl;
 
     // Write Color Image
     cv::imwrite( oss.str(), color_mat, params );
@@ -512,7 +543,8 @@ inline void RealSense::saveDepth()
     // Create Save Directory and File Name
     std::ostringstream oss;
     oss << directory.generic_string() << "/Depth/";
-    oss << std::setfill( '0' ) << std::setw( 6 ) << depth_frame.get_frame_number() << ".png";
+    oss << "depth_" << frame_num/frame_int + 1 << ".png";
+    std::cout << "depth_" << frame_num/frame_int + 1 << ".png" << " saved."<<std::endl;
 
     // Scalinge
     cv::Mat scale_mat = depth_mat;
@@ -541,7 +573,7 @@ inline void RealSense::saveInfrared()
         // Create Save Directory and File Name
         std::ostringstream oss;
         oss << directory.generic_string() << "/Infrared " << std::to_string( infrared_stream_index ) << "/";
-        oss << std::setfill( '0' ) << std::setw( 6 ) << infrared_frame.get_frame_number() << ".jpg";
+        oss << std::setfill( '0' ) << std::setw( 6 ) << infrared_frame.get_frame_number() << ".png";
 
         // Write Infrared Image
         cv::imwrite( oss.str(), infrared_mats[infrared_mat_index], params );
