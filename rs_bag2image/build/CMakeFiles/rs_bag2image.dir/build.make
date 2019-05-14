@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/bin/cmake
+CMAKE_COMMAND = /opt/cmake-3.14.3-Linux-x86_64/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/bin/cmake -E remove -f
+RM = /opt/cmake-3.14.3-Linux-x86_64/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dingyi/rs_bag2image/rs_bag2image
+CMAKE_SOURCE_DIR = /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dingyi/rs_bag2image/rs_bag2image/build
+CMAKE_BINARY_DIR = /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/rs_bag2image.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/rs_bag2image.dir/flags.make
 
 CMakeFiles/rs_bag2image.dir/realsense.cpp.o: CMakeFiles/rs_bag2image.dir/flags.make
 CMakeFiles/rs_bag2image.dir/realsense.cpp.o: ../realsense.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rs_bag2image.dir/realsense.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rs_bag2image.dir/realsense.cpp.o -c /home/dingyi/rs_bag2image/rs_bag2image/realsense.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/rs_bag2image.dir/realsense.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rs_bag2image.dir/realsense.cpp.o -c /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.cpp
 
 CMakeFiles/rs_bag2image.dir/realsense.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rs_bag2image.dir/realsense.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingyi/rs_bag2image/rs_bag2image/realsense.cpp > CMakeFiles/rs_bag2image.dir/realsense.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.cpp > CMakeFiles/rs_bag2image.dir/realsense.cpp.i
 
 CMakeFiles/rs_bag2image.dir/realsense.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rs_bag2image.dir/realsense.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingyi/rs_bag2image/rs_bag2image/realsense.cpp -o CMakeFiles/rs_bag2image.dir/realsense.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.cpp -o CMakeFiles/rs_bag2image.dir/realsense.cpp.s
 
 CMakeFiles/rs_bag2image.dir/main.cpp.o: CMakeFiles/rs_bag2image.dir/flags.make
 CMakeFiles/rs_bag2image.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rs_bag2image.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rs_bag2image.dir/main.cpp.o -c /home/dingyi/rs_bag2image/rs_bag2image/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rs_bag2image.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rs_bag2image.dir/main.cpp.o -c /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/main.cpp
 
 CMakeFiles/rs_bag2image.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rs_bag2image.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dingyi/rs_bag2image/rs_bag2image/main.cpp > CMakeFiles/rs_bag2image.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/main.cpp > CMakeFiles/rs_bag2image.dir/main.cpp.i
 
 CMakeFiles/rs_bag2image.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rs_bag2image.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dingyi/rs_bag2image/rs_bag2image/main.cpp -o CMakeFiles/rs_bag2image.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/main.cpp -o CMakeFiles/rs_bag2image.dir/main.cpp.s
 
 # Object files for target rs_bag2image
 rs_bag2image_OBJECTS = \
@@ -141,7 +141,7 @@ rs_bag2image: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_objdetect3.so.3.3.
 rs_bag2image: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_imgproc3.so.3.3.1
 rs_bag2image: /opt/ros/kinetic/lib/x86_64-linux-gnu/libopencv_core3.so.3.3.1
 rs_bag2image: CMakeFiles/rs_bag2image.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable rs_bag2image"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable rs_bag2image"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rs_bag2image.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -154,6 +154,6 @@ CMakeFiles/rs_bag2image.dir/clean:
 .PHONY : CMakeFiles/rs_bag2image.dir/clean
 
 CMakeFiles/rs_bag2image.dir/depend:
-	cd /home/dingyi/rs_bag2image/rs_bag2image/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dingyi/rs_bag2image/rs_bag2image /home/dingyi/rs_bag2image/rs_bag2image /home/dingyi/rs_bag2image/rs_bag2image/build /home/dingyi/rs_bag2image/rs_bag2image/build /home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build /home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/rs_bag2image.dir/depend
 

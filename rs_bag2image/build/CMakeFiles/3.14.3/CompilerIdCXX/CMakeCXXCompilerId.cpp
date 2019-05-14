@@ -20,9 +20,6 @@
 # if defined(_MSC_VER)
 #  define SIMULATE_ID "MSVC"
 # endif
-# if defined(__GNUC__)
-#  define SIMULATE_ID "GNU"
-# endif
   /* __INTEL_COMPILER = VRP */
 # define COMPILER_VERSION_MAJOR DEC(__INTEL_COMPILER/100)
 # define COMPILER_VERSION_MINOR DEC(__INTEL_COMPILER/10 % 10)
@@ -39,17 +36,6 @@
    /* _MSC_VER = VVRR */
 #  define SIMULATE_VERSION_MAJOR DEC(_MSC_VER / 100)
 #  define SIMULATE_VERSION_MINOR DEC(_MSC_VER % 100)
-# endif
-# if defined(__GNUC__)
-#  define SIMULATE_VERSION_MAJOR DEC(__GNUC__)
-# elif defined(__GNUG__)
-#  define SIMULATE_VERSION_MAJOR DEC(__GNUG__)
-# endif
-# if defined(__GNUC_MINOR__)
-#  define SIMULATE_VERSION_MINOR DEC(__GNUC_MINOR__)
-# endif
-# if defined(__GNUC_PATCHLEVEL__)
-#  define SIMULATE_VERSION_PATCH DEC(__GNUC_PATCHLEVEL__)
 # endif
 
 #elif defined(__PATHCC__)
@@ -120,32 +106,48 @@
 
 #elif defined(__IBMCPP__) && defined(__COMPILER_VER__)
 # define COMPILER_ID "zOS"
-  /* __IBMCPP__ = VRP */
-# define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
-# define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
-# define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# if defined(__ibmxl__)
+#  define COMPILER_VERSION_MAJOR DEC(__ibmxl_version__)
+#  define COMPILER_VERSION_MINOR DEC(__ibmxl_release__)
+#  define COMPILER_VERSION_PATCH DEC(__ibmxl_modification__)
+#  define COMPILER_VERSION_TWEAK DEC(__ibmxl_ptf_fix_level__)
+# else
+   /* __IBMCPP__ = VRP */
+#  define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
+#  define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
+#  define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# endif
 
-#elif defined(__ibmxl__) && defined(__clang__)
-# define COMPILER_ID "XLClang"
-# define COMPILER_VERSION_MAJOR DEC(__ibmxl_version__)
-# define COMPILER_VERSION_MINOR DEC(__ibmxl_release__)
-# define COMPILER_VERSION_PATCH DEC(__ibmxl_modification__)
-# define COMPILER_VERSION_TWEAK DEC(__ibmxl_ptf_fix_level__)
 
-
-#elif defined(__IBMCPP__) && !defined(__COMPILER_VER__) && __IBMCPP__ >= 800
+#elif defined(__ibmxl__) || (defined(__IBMCPP__) && !defined(__COMPILER_VER__) && __IBMCPP__ >= 800)
 # define COMPILER_ID "XL"
-  /* __IBMCPP__ = VRP */
-# define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
-# define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
-# define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# if defined(__ibmxl__)
+#  define COMPILER_VERSION_MAJOR DEC(__ibmxl_version__)
+#  define COMPILER_VERSION_MINOR DEC(__ibmxl_release__)
+#  define COMPILER_VERSION_PATCH DEC(__ibmxl_modification__)
+#  define COMPILER_VERSION_TWEAK DEC(__ibmxl_ptf_fix_level__)
+# else
+   /* __IBMCPP__ = VRP */
+#  define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
+#  define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
+#  define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# endif
+
 
 #elif defined(__IBMCPP__) && !defined(__COMPILER_VER__) && __IBMCPP__ < 800
 # define COMPILER_ID "VisualAge"
-  /* __IBMCPP__ = VRP */
-# define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
-# define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
-# define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# if defined(__ibmxl__)
+#  define COMPILER_VERSION_MAJOR DEC(__ibmxl_version__)
+#  define COMPILER_VERSION_MINOR DEC(__ibmxl_release__)
+#  define COMPILER_VERSION_PATCH DEC(__ibmxl_modification__)
+#  define COMPILER_VERSION_TWEAK DEC(__ibmxl_ptf_fix_level__)
+# else
+   /* __IBMCPP__ = VRP */
+#  define COMPILER_VERSION_MAJOR DEC(__IBMCPP__/100)
+#  define COMPILER_VERSION_MINOR DEC(__IBMCPP__/10 % 10)
+#  define COMPILER_VERSION_PATCH DEC(__IBMCPP__    % 10)
+# endif
+
 
 #elif defined(__PGI)
 # define COMPILER_ID "PGI"
@@ -274,11 +276,25 @@
 #  define COMPILER_VERSION_MINOR DEC(((__VER__) / 1000) % 1000)
 #  define COMPILER_VERSION_PATCH DEC((__VER__) % 1000)
 #  define COMPILER_VERSION_INTERNAL DEC(__IAR_SYSTEMS_ICC__)
-# elif defined(__VER__) && (defined(__ICCAVR__) || defined(__ICCRX__))
+# elif defined(__VER__) && defined(__ICCAVR__)
 #  define COMPILER_VERSION_MAJOR DEC((__VER__) / 100)
 #  define COMPILER_VERSION_MINOR DEC((__VER__) - (((__VER__) / 100)*100))
 #  define COMPILER_VERSION_PATCH DEC(__SUBVERSION__)
 #  define COMPILER_VERSION_INTERNAL DEC(__IAR_SYSTEMS_ICC__)
+# endif
+
+#elif defined(_SGI_COMPILER_VERSION) || defined(_COMPILER_VERSION)
+# define COMPILER_ID "MIPSpro"
+# if defined(_SGI_COMPILER_VERSION)
+  /* _SGI_COMPILER_VERSION = VRP */
+#  define COMPILER_VERSION_MAJOR DEC(_SGI_COMPILER_VERSION/100)
+#  define COMPILER_VERSION_MINOR DEC(_SGI_COMPILER_VERSION/10 % 10)
+#  define COMPILER_VERSION_PATCH DEC(_SGI_COMPILER_VERSION    % 10)
+# else
+  /* _COMPILER_VERSION = VRP */
+#  define COMPILER_VERSION_MAJOR DEC(_COMPILER_VERSION/100)
+#  define COMPILER_VERSION_MINOR DEC(_COMPILER_VERSION/10 % 10)
+#  define COMPILER_VERSION_PATCH DEC(_COMPILER_VERSION    % 10)
 # endif
 
 
@@ -466,9 +482,6 @@ char const *info_cray = "INFO" ":" "compiler_wrapper[CrayPrgEnv]";
 #elif defined(__IAR_SYSTEMS_ICC__) || defined(__IAR_SYSTEMS_ICC)
 # if defined(__ICCARM__)
 #  define ARCHITECTURE_ID "ARM"
-
-# elif defined(__ICCRX__)
-#  define ARCHITECTURE_ID "RX"
 
 # elif defined(__ICCAVR__)
 #  define ARCHITECTURE_ID "AVR"

@@ -6,19 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/home/dingyi/rs_bag2image/rs_bag2image/realsense.cpp
+/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.cpp
 realsense.h
-/home/dingyi/rs_bag2image/rs_bag2image/realsense.h
+/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.h
 version.h
-/home/dingyi/rs_bag2image/rs_bag2image/version.h
+/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/version.h
 sstream
 -
 iomanip
 -
 limits
 -
+iostream
+-
+vector
+-
+string
+-
 
-/home/dingyi/rs_bag2image/rs_bag2image/realsense.h
+/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.h
 librealsense2/rs.hpp
 -
 opencv2/opencv.hpp
@@ -32,7 +38,7 @@ filesystem
 experimental/filesystem
 -
 
-/home/dingyi/rs_bag2image/rs_bag2image/version.h
+/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/version.h
 
 /opt/ros/kinetic/include/opencv-3.3.1-dev/opencv/cxcore.h
 opencv2/core/core_c.h

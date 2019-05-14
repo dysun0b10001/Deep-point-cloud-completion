@@ -26,6 +26,10 @@ private:
     rs2::pipeline_profile pipeline_profile;
     rs2::frameset frameset;
 
+    // frame number and interval
+    uint32_t frame_num = 0;
+    uint32_t frame_int = 1;
+
     // Color Buffer
     rs2::frame color_frame;
     cv::Mat color_mat;

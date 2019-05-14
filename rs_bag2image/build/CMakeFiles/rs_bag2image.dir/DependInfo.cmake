@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dingyi/rs_bag2image/rs_bag2image/main.cpp" "/home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/main.cpp.o"
-  "/home/dingyi/rs_bag2image/rs_bag2image/realsense.cpp" "/home/dingyi/rs_bag2image/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/realsense.cpp.o"
+  "/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/main.cpp" "/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/main.cpp.o"
+  "/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/realsense.cpp" "/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/rs_bag2image.dir/realsense.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
