@@ -9,11 +9,52 @@
 #include <fstream>  // File IO
 #include <iostream> // Terminal IO
 #include <sstream>  // Stringstreams
+#include <iomanip>
+#include <limits>
+#include <librealsense2/rs.hpp>
+#include <opencv2/opencv.hpp>
+#include <array>
 
 // 3rd party header for writing png files
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+
+// Draw Depth
+cv::Mat drawDepth(rs2::depth_frame depth)
+{
+    cv::Mat depth_mat;
+    // Create cv::Mat form Depth Frame
+    depth_mat = cv::Mat( depth.get_height(), depth.get_width(), CV_16UC1, const_cast<void*>( depth.get_data() ) ).clone();
+    return depth_mat;
+}
+
+// Save Depth
+void saveDepth(cv::Mat depth_mat, rs2::depth_frame depth)
+{
+    if( !depth ){
+        return;
+    }
+
+    if( depth_mat.empty() ){
+        return;
+    }
+
+    // Create Save Directory and File Name
+    std::ostringstream oss;
+    oss << "~/Depth_image/";
+    oss << std::setfill( '0' ) << std::setw( 6 ) << depth.get_frame_number() << ".png";
+
+    // Scalinge
+    cv::Mat scale_mat = depth_mat;
+    // if( scaling ){
+    //     depth_mat.convertTo( scale_mat, CV_8U, -255.0 / 10000.0, 255.0 ); // 0-10000 -> 255(white)-0(black)
+    // }
+
+    // Write Depth Image
+    cv::imwrite( "rs-save-to-disk-depth.png", scale_mat );
+    std::cout << "depth written" << std::endl;
+}
 /*
  This example introduces the concept of spatial stream alignment.
  For example usecase of alignment, please check out align-advanced and measure demos.
@@ -43,6 +84,7 @@ void render_slider(rect location, float *alpha, direction *dir);
 
 int main(int argc, char *argv[]) try
 {
+    cv::Mat depth_mat;
     // Create and initialize GUI related objects
     window app(1280, 720, "RealSense Align Example"); // Simple window handling
     ImGui_ImplGlfw_Init(app, false);                  // ImGui library intializition
@@ -87,13 +129,18 @@ int main(int argc, char *argv[]) try
         auto color = frameset.get_color_frame();
         auto colorized_depth = c.colorize(depth);
 
-        // Write images to disk
-        std::stringstream png_file1;
-        png_file1 << "rs-save-to-disk-depth" << ".png";
-        stbi_write_png(png_file1.str().c_str(), depth.get_width(), depth.get_height(),
-                       depth.get_bytes_per_pixel(), depth.get_data(), depth.get_stride_in_bytes());
-        std::cout << "Saved " << png_file1.str() << std::endl;
-        std::cout << "Data depth " << depth.get_bytes_per_pixel() << std::endl;
+        // // Write images to disk
+        // std::stringstream png_file1;
+        // png_file1 << "rs-save-to-disk-depth" << ".png";
+        // stbi_write_png(png_file1.str().c_str(), depth.get_width(), depth.get_height(),
+        //                depth.get_bytes_per_pixel(), depth.get_data(), depth.get_stride_in_bytes());
+        // std::cout << "Saved " << png_file1.str() << std::endl;
+        // std::cout << "Data depth " << depth.get_bytes_per_pixel() << std::endl;
+
+        // Draw Depth
+        depth_mat = drawDepth(depth);
+        // Save Depth
+        saveDepth(depth_mat,depth);
 
         std::stringstream png_file2;
         // Write images to disk
@@ -176,3 +223,5 @@ void render_slider(rect location, float *alpha, direction *dir)
 
     ImGui::End();
 }
+
+
