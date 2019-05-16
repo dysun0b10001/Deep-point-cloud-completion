@@ -1,3 +1,0 @@
-/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/rebuild_cache.dir
-/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/rs_bag2image.dir
-/home/xi/DeepCompletionRelease/my_experiment/rs_bag2image/build/CMakeFiles/edit_cache.dir
