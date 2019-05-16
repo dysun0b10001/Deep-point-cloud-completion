@@ -26,6 +26,11 @@ Checkboxes below allow toggling between depth to color vs color to depth alignme
 
 <p align="center"><img src="https://raw.githubusercontent.com/wiki/dorodnic/librealsense/align-expected.gif" alt="screenshot gif"/></p>
 
+## Modifications on Librealsense Example "align" (important)
+This tool aims at creating well aligned RGB and depth images from camera streaming, recording corresponding frame numbers to a txt file, and saving them to the designated directory. Thus the saving dirctory needs to be provided in command lines. Besides, an option is offered for specifying the frame interval between two consecutive saved frames, the default value is 1 (saving every frame).  
+
+
+
 ## Code Overview
 
 This example is using standard `librealsense` API and `IMGUI` library for simple UI rendering:
