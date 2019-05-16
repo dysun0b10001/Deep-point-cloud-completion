@@ -32,7 +32,7 @@ Checkboxes below allow toggling between depth to color vs color to depth alignme
 path/to/align-test -h=subdirectory/under/current/path -i=30
 ```
 
-2. **Build** - To make this tool, you need to download librealsense first:
+2. **Build** - To make this tool, you need to download Intel RealSense SDK first,
 
 
 
