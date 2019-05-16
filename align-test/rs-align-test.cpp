@@ -37,8 +37,8 @@ namespace filesystem = std::experimental::filesystem;
 void initialize(int argc, char * argv[], filesystem::path & home_dir, uint32_t & frame_int)
 {
     const std::string keys =
-        "{ home h    |       | home saving directory, required (path)                            }"
-        "{ interval i| 1     | frame interval of saved images, optional, default is 1 (uint32_t) }";
+        "{ home h    | .     | home saving directory under current directory, optional, default is current directory (path)}"
+        "{ interval i| 1     | frame interval of saved images, optional, default is 1 (uint32_t)                           }";
     cv::CommandLineParser parser( argc, argv, keys );
 
     // Check Parsing Error
@@ -49,15 +49,15 @@ void initialize(int argc, char * argv[], filesystem::path & home_dir, uint32_t &
 
     // get home directory and create subdirectory for color and depth images
     if( !parser.has("home")){
-        throw std::runtime_error( "no home saving directory provided");
+        home_dir = ".";
     }
     else{
         home_dir = parser.get<std::string>("home");
-        filesystem::path color_dir = home_dir.generic_string() + "/Color";
-        filesystem::path depth_dir = home_dir.generic_string() + "/Depth";
-        filesystem::create_directories(color_dir);
-        filesystem::create_directories(depth_dir);
     }
+    filesystem::path color_dir = home_dir.generic_string() + "/Color";
+    filesystem::path depth_dir = home_dir.generic_string() + "/Depth";
+    filesystem::create_directories(color_dir);
+    filesystem::create_directories(depth_dir);
 
     // get frame interval (Option)
     if( !parser.has( "interval" ) ){
