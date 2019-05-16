@@ -26,6 +26,28 @@ Checkboxes below allow toggling between depth to color vs color to depth alignme
 
 <p align="center"><img src="https://raw.githubusercontent.com/wiki/dorodnic/librealsense/align-expected.gif" alt="screenshot gif"/></p>
 
+## Modifications on Librealsense Example "align" (important)
+1. **Usage** - This tool aims at creating well aligned RGB and depth images from camera streaming, recording corresponding frame numbers to a txt file, and saving them to current path. An option is provided that you can specify subdirectory you want to save the images to under current path. Besides, another option is offered for specifying the frame interval between two consecutive saved frames, the default value is 1 (saving every frame). An example of command lines is shown below:
+```
+path/to/align-test/executable -h=subdirectory/under/current/path -i=30
+```
+
+2. **Build** - You need to download Intel RealSense SDK first, but please do not perform cmake and make to build it in this step.(important)
+```
+git clone https://github.com/IntelRealSense/librealsense.git
+```
+Then put this directory under `librealsense/examples`, and add a line to the last of `librealsense/examples/CMakeLists.txt` file:
+```
+add_subdirectory(align-test)
+```
+At last, you can build Intel RealSense SDK and get this tool.
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+
 ## Code Overview
 
 This example is using standard `librealsense` API and `IMGUI` library for simple UI rendering:
