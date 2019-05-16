@@ -16,18 +16,10 @@
 #include <array>
 #include <string>
 #include <vector>
-#ifdef WIN32
-#include <experimental/filesystem>
-namespace filesystem = std::experimental::filesystem::v1;
-#else
-#if __has_include(<filesystem>)
-#include <filesystem>
-namespace filesystem = std::filesystem;
-#else
-#include <experimental/filesystem>
-namespace filesystem = std::experimental::filesystem;
-#endif
-#endif
+#define BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/filesystem.hpp>
+#undef BOOST_NO_CXX11_SCOPED_ENUMS
+namespace filesystem = boost::filesystem;
 
 // 3rd party header for writing png files
 #define STB_IMAGE_WRITE_IMPLEMENTATION

@@ -1,12 +1,13 @@
 # License: Apache 2.0. See LICENSE file in root directory.
 # Copyright(c) 2019 Intel Corporation. All Rights Reserved.
-#  minimum required cmake version: 3.6
-cmake_minimum_required( VERSION 3.6 )
+#  minimum required cmake version: 3.1.0
+cmake_minimum_required( VERSION 3.1.0 )
 
-# Require C++17 (or later)
-set( CMAKE_CXX_STANDARD 17 )
+# Require C++14 (or later)
+set( CMAKE_CXX_STANDARD 14 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
+
 
 project(RealsenseExamplesAlign)
 
@@ -30,12 +31,8 @@ if(BUILD_GRAPHICAL_EXAMPLES)
 endif()
 
 if( realsense2_FOUND AND OpenCV_FOUND )
-  # Additional Include Directories
-  include_directories( ${realsense_INCLUDE_DIR} )
-  include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-  # Additional Dependencies
-  if( NOT WIN32 )
-      target_link_libraries( rs-align-test stdc++fs )
-  endif()
+    target_link_libraries( rs-align-test boost_system )
+    target_link_libraries( rs-align-test boost_filesystem )
+    target_link_libraries( rs-align-test stdc++fs )
 endif()
+
