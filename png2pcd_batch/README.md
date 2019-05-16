@@ -1,15 +1,7 @@
 png2pcd_batch   -   simple command line utility to convert depth and rgb frames
 from png format to PCL pointcloud.
 
-There are 2 execution mode:
-using file with association information i.e. containing rgb-depth png files correspondence
-or just providing folders that contain depth and rgb frames ( not reccommended ).
 
-In 1st case you should anyhow create associate file by yourself 
-(for further details check description of parse_freiburg function)
-In 2nd case - correspondence strictly depends on file names, and you should check it twice,
-to avoid situation when selected depth frame is not appropriate for rgb frame.
-( add sorting to filenames vector using custom predicate )
 
 All dataset related parameters are incapsulated in Intr structure ( intrinsics ).
 There are: width, height, fx, fy, cx, cy, scale_factor.
